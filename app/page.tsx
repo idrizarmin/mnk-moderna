@@ -309,14 +309,14 @@ export default function ModernaClubPage() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
-                {["#07140d", "#37e718", "#23ad00"].map((color) => (
+              <div className="grid grid-cols-3 gap-3 sm:gap-4">
+                {["#07140d", "#23ad00", "#23db02"].map((color) => (
                   <div
                     key={color}
-                    className="flex min-h-[72px] items-end rounded-[1.5rem] border border-white/10 p-4"
+                    className="flex items-end justify-center rounded-[1.2rem] sm:rounded-[1.5rem] border border-white/10 p-3 sm:p-4 aspect-[3/1] sm:aspect-auto"
                     style={{ backgroundColor: color }}
                   >
-                    <div className="text-xs font-bold text-black/70 mix-blend-screen sm:text-sm">
+                    <div className="text-[10px] sm:text-sm font-bold text-black/70 mix-blend-screen">
                       {color}
                     </div>
                   </div>
