@@ -30,7 +30,10 @@ export default function ModernaClubPage() {
 
       <header className="sticky top-0 z-40 border-b border-white/10 bg-[#07140d]/70 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4 lg:px-8">
-          <a href="#home" className="flex min-w-0 items-center gap-2.5 sm:gap-3">
+          <a
+            href="#home"
+            className="flex min-w-0 items-center gap-2.5 sm:gap-3"
+          >
             <img
               src="/ModernaLogo.png"
               alt="Moderna logo"
@@ -92,9 +95,10 @@ export default function ModernaClubPage() {
                 className="mt-5 max-w-2xl text-base leading-7 text-white/75 sm:mt-6 sm:text-lg sm:leading-8"
               >
                 Dobrodošli na službenu stranicu malonogometnog kluba{" "}
-                <strong>Moderna</strong>. Klub osnovan 2022. godine okuplja mlad,
-                ambiciozan i borben tim sa jasnim ciljem — graditi prepoznatljiv
-                identitet, timski duh i sportski respekt na svakom terenu.
+                <strong>Moderna</strong>. Klub osnovan 2022. godine okuplja
+                mlad, ambiciozan i borben tim sa jasnim ciljem — graditi
+                prepoznatljiv identitet, timski duh i sportski respekt na svakom
+                terenu.
               </motion.p>
 
               <motion.div
@@ -149,7 +153,7 @@ export default function ModernaClubPage() {
                 <img
                   src="/ModernaLogo.png"
                   alt="MNK Moderna logo"
-                 className="h-[220px] w-full object-contain p-6 sm:h-[380px] sm:object-cover sm:p-0 lg:h-[520px]"
+                  className="h-[220px] w-full object-contain p-6 sm:h-[380px] sm:object-cover sm:p-0 lg:h-[520px]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#07140d] via-[#07140d]/20 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
@@ -254,7 +258,9 @@ export default function ModernaClubPage() {
                   className="group rounded-[2rem] border border-white/10 bg-white/5 p-6 transition duration-300 hover:-translate-y-1 hover:border-[#39ff14]/40 hover:bg-white/10 sm:p-7"
                 >
                   <div className="mb-5 h-1.5 w-16 rounded-full bg-[#39ff14] transition group-hover:w-24" />
-                  <h4 className="text-xl font-bold sm:text-2xl">{item.title}</h4>
+                  <h4 className="text-xl font-bold sm:text-2xl">
+                    {item.title}
+                  </h4>
                   <p className="mt-4 text-sm leading-7 text-white/70 sm:text-base">
                     {item.text}
                   </p>
@@ -280,7 +286,7 @@ export default function ModernaClubPage() {
               className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5"
             >
               <img
-                src="/Moderna1.png"
+                src="/Moderna3.png"
                 alt="Team photo"
                 className="h-[260px] w-full object-cover transition duration-700 hover:scale-105 sm:h-[360px] lg:h-full"
               />
@@ -298,8 +304,8 @@ export default function ModernaClubPage() {
                   Boje našeg kluba nisu samo vizuelni identitet — one
                   predstavljaju energiju, strast i borbeni duh koji nosimo na
                   svakom terenu. Zelena simbolizuje rast, snagu i stalni
-                  napredak, dok tamni tonovi naglašavaju ozbiljnost i fokus našeg
-                  tima.
+                  napredak, dok tamni tonovi naglašavaju ozbiljnost i fokus
+                  našeg tima.
                 </p>
               </div>
 
