@@ -1,7 +1,16 @@
 "use client";
+import { useRef, useState } from "react";
 
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Trophy, Users, Shield } from "lucide-react";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Trophy,
+  Users,
+  Shield,
+  ChevronDown,
+} from "lucide-react";
 import Image from "next/image";
 
 const fadeUp = {
@@ -19,6 +28,50 @@ const stagger = {
 };
 
 export default function ModernaClubPage() {
+  const [showAllGallery, setShowAllGallery] = useState(false);
+
+  const galleryImages = [
+    "/Slika2.jpeg",
+    "/Slika3.jpeg",
+    "/Slika4.jpeg",
+    "/Slika5.jpeg",
+    "/sedzimir.jpeg",
+    "/Moderna3.png",
+    "/Moderna2.jpeg",
+  ];
+
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+  const isDown = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!scrollRef.current) return;
+    isDown.current = true;
+    startX.current = e.pageX - scrollRef.current.offsetLeft;
+    scrollLeft.current = scrollRef.current.scrollLeft;
+  };
+
+  const handleMouseLeave = () => {
+    isDown.current = false;
+  };
+
+  const handleMouseUp = () => {
+    isDown.current = false;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isDown.current || !scrollRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX.current) * 1.4;
+    scrollRef.current.scrollLeft = scrollLeft.current - walk;
+  };
+
+  const visibleMobileImages = showAllGallery
+    ? galleryImages
+    : galleryImages.slice(0, 3);
+
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#07140d] text-white selection:bg-[#39ff14] selection:text-[#07140d]">
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
@@ -183,7 +236,7 @@ export default function ModernaClubPage() {
             >
               <div className="relative h-[260px] min-h-[260px] w-full sm:h-[360px] lg:h-full">
                 <Image
-                  src="/Moderna2.jpeg"
+                  src="/Ekipa.jpeg"
                   alt="MNK Moderna"
                   fill
                   className="rounded-[2rem] object-cover"
@@ -208,9 +261,12 @@ export default function ModernaClubPage() {
                 svježinu, borbenost i napredak.
               </p>
               <p className="mt-4 text-sm leading-7 text-white/75 sm:text-base sm:leading-8">
-                Ova stranica može služiti kao centralno mjesto za predstavljanje
-                kluba, objavu novosti, fotografija, rezultata, rasporeda
-                utakmica i kontakta za navijače, igrače i sponzore.
+                <p className="mt-4 text-sm leading-7 text-white/75 sm:text-base sm:leading-8">
+                  Cilj ekipe nije samo ostvarivanje rezultata, već stvaranje
+                  atmosfere u kojoj svaki član kluba doprinosi zajedničkoj
+                  priči, razvoju ekipe i predstavljanju Moderne na najbolji
+                  mogući način.
+                </p>
               </p>
             </motion.div>
           </motion.div>
@@ -279,49 +335,88 @@ export default function ModernaClubPage() {
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
             variants={stagger}
-            className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]"
           >
-            <motion.div
-              variants={fadeUp}
-              className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5"
-            >
-              <img
-                src="/Moderna3.png"
-                alt="Team photo"
-                className="h-[260px] w-full object-cover transition duration-700 hover:scale-105 sm:h-[360px] lg:h-full"
-              />
+            <motion.div variants={fadeUp} className="mb-10">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#39ff14] sm:text-sm sm:tracking-[0.3em]">
+                Galerija
+              </p>
+
+              <h3 className="mt-3 text-2xl font-black sm:text-3xl lg:text-4xl">
+                Moderna kroz objektiv
+              </h3>
+
+              <p className="mt-4 max-w-3xl text-sm leading-7 text-white/75 sm:text-base sm:leading-8">
+                Trenuci sa utakmica, atmosfera ekipe i identitet kluba kroz
+                fotografije koje predstavljaju energiju i zajedništvo MNK
+                Moderna.
+              </p>
             </motion.div>
 
-            <motion.div variants={fadeUp} className="grid gap-4 sm:gap-6">
-              <div className="rounded-[2rem] border border-white/10 bg-white/5 p-6 sm:p-8">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#39ff14] sm:text-sm sm:tracking-[0.3em]">
-                  Vizuelni identitet
-                </p>
-                <h3 className="mt-3 text-2xl font-black sm:text-3xl">
-                  Boje koje nose energiju kluba
-                </h3>
-                <p className="mt-5 text-sm leading-7 text-white/75 sm:text-base sm:leading-8">
-                  Boje našeg kluba nisu samo vizuelni identitet — one
-                  predstavljaju energiju, strast i borbeni duh koji nosimo na
-                  svakom terenu. Zelena simbolizuje rast, snagu i stalni
-                  napredak, dok tamni tonovi naglašavaju ozbiljnost i fokus
-                  našeg tima.
-                </p>
-              </div>
+            {/* Desktop / tablet horizontal scroll */}
+            <motion.div
+              ref={scrollRef}
+              variants={fadeUp}
+              onMouseDown={handleMouseDown}
+              onMouseLeave={handleMouseLeave}
+              onMouseUp={handleMouseUp}
+              onMouseMove={handleMouseMove}
+              className="hidden cursor-grab select-none gap-5 overflow-x-auto pb-2 pr-4 scroll-smooth active:cursor-grabbing md:flex
+  [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            >
+              {galleryImages.map((src, index) => (
+                <div
+                  key={src}
+                  className="group relative h-[360px] min-w-[420px] overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 shadow-2xl lg:min-w-[520px]"
+                >
+                  <img
+                    src={src}
+                    alt={`MNK Moderna gallery ${index + 1}`}
+                    draggable={false}
+                    className="pointer-events-none h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                  />
 
-              <div className="grid grid-cols-3 gap-3 sm:gap-4">
-                {["#07140d", "#23ad00", "#23db02"].map((color) => (
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#07140d]/35 via-transparent to-transparent opacity-0 transition duration-500 group-hover:opacity-100" />
+
+                  <div className="absolute inset-0 rounded-[2rem] ring-1 ring-inset ring-white/10 transition duration-500 group-hover:ring-[#39ff14]/40" />
+                </div>
+              ))}
+            </motion.div>
+
+            {/* Mobile expandable gallery */}
+            <motion.div variants={fadeUp} className="grid gap-4 md:hidden">
+              <div className="grid gap-4">
+                {visibleMobileImages.map((src, index) => (
                   <div
-                    key={color}
-                    className="flex items-end justify-center rounded-[1.2rem] sm:rounded-[1.5rem] border border-white/10 p-3 sm:p-4 aspect-[3/1] sm:aspect-auto"
-                    style={{ backgroundColor: color }}
+                    key={src}
+                    className="group relative h-[240px] overflow-hidden rounded-[1.7rem] border border-white/10 bg-white/5"
                   >
-                    <div className="text-[10px] sm:text-sm font-bold text-black/70 mix-blend-screen">
-                      {color}
-                    </div>
+                    <img
+                      src={src}
+                      alt={`MNK Moderna gallery ${index + 1}`}
+                      className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                    />
+
+                    <div className="absolute inset-0 rounded-[1.7rem] ring-1 ring-inset ring-white/10" />
                   </div>
                 ))}
               </div>
+
+              {galleryImages.length > 3 && (
+                <button
+                  type="button"
+                  onClick={() => setShowAllGallery((prev) => !prev)}
+                  aria-label={
+                    showAllGallery ? "Prikaži manje slika" : "Prikaži još slika"
+                  }
+                  className="mx-auto mt-3 flex h-10 w-10 items-center justify-center rounded-full border border-[#39ff14]/30 bg-[#39ff14]/10 text-[#39ff14] shadow-[0_0_25px_rgba(57,255,20,0.15)] transition hover:bg-[#39ff14]/20 active:scale-95"
+                >
+                  <ChevronDown
+                    className={`h-6 w-6 transition-transform duration-300 ${
+                      showAllGallery ? "rotate-180" : "rotate-0"
+                    }`}
+                  />
+                </button>
+              )}
             </motion.div>
           </motion.div>
         </section>
@@ -362,7 +457,7 @@ export default function ModernaClubPage() {
                   {
                     icon: Mail,
                     label: "Email",
-                    value: "idriz.armin5@gmail.com",
+                    value: "mnkmoderna2022@gmail.com",
                   },
                   {
                     icon: MapPin,
