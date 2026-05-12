@@ -34,7 +34,7 @@ export default function ModernaClubPage() {
     "/Slika2.jpeg",
     "/Slika3.jpeg",
     "/Slika4.jpeg",
-    "/Slika5.jpeg",
+    "/slika5.jpeg",
     "/sedzimir.jpeg",
     "/Moderna3.png",
     "/Moderna2.jpeg",
